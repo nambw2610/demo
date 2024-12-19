@@ -18,6 +18,7 @@ jobs:
           port: ${{ secrets.PORT }}
           envs: TAG
           script: |
+            echo "================================Install Docker======================================="
             sudo apt-get update
             sudo apt-get install ca-certificates curl
             sudo install -m 0755 -d /etc/apt/keyrings
@@ -30,17 +31,17 @@ jobs:
             sudo apt-get update
             sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
             sudo docker ps
-
+            echo "================================Install Kubectl======================================="
             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
             echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
             chmod +x kubectl
             sudo mv kubectl /usr/local/bin/
             kubectl version --client --output=yaml
-
+            echo "================================Install Helm======================================="
             curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2
             helm --help
-
+            echo "================================Install Terraform======================================="
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
             echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
             sudo apt update
