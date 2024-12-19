@@ -18,7 +18,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.SSH_KEY_BUILD }}
-          port: ${{ secrets.PORT }}
+          port: 234
           envs: TAG
           script: |
             ls -a
