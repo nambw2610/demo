@@ -38,9 +38,7 @@ jobs:
             sudo mv kubectl /usr/local/bin/
             kubectl version --client --output=yaml
 
-            curl -LO "https://get.helm.sh/helm-$(curl -s https://github.com/helm/helm/releases/latest | grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+')-linux-amd64.tar.gz"
-            tar -zxvf helm-*-linux-amd64.tar.gz
-            sudo mv linux-amd64/helm /usr/local/bin/helm
+            curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2
             helm version
 
 
